@@ -1,0 +1,66 @@
+---
+- hosts: all
+  sudo: yes
+
+  # tasks:
+  #   - name: Set global cluster variable facts
+  #     set_fact:
+  #       zk_endpoint: "zk://{{ groups['mesos-masters'] | join(':2181,') }}:2181"
+
+  roles:
+    - common
+
+- hosts: ambari-masters
+  sudo: yes
+  roles:
+    - ambari
+
+# - hosts: cdh5-all
+#   gather_facts: false
+#   sudo: yes
+#   vars:
+#     - zookeeper_servers: "{{ groups['mesos-masters'] }}"
+#     - zk_servers_noproto: "{{ groups['mesos-masters'] | join(':2181,') }}:2181"
+#     - quorum_size: "{{ ((groups['mesos-masters']|length) // 2) + 1 }}"
+#   roles:
+#   - { role: cdh5-base }
+#
+# # Mesos masters
+# - hosts: mesos-masters
+#   gather_facts: false
+#   sudo: yes
+#
+#   vars:
+#     - zookeeper_servers: "{{ groups['mesos-masters'] }}"
+#     - mesos_quorum: "{{ ((groups['mesos-masters']|length) // 2) + 1 }}"
+#
+#   roles:
+#     - { role: zookeeper, tags: [ 'zookeeper' ] }
+#     - { role: mesosphere, tags: [ 'mesos' ], mesos_mode: master }
+#     - { role: marathon, tags: [ 'marathon'] }
+#     #- { role: chronos, tags: [ 'chronos'] }
+#
+# # Mesos slaves
+# - hosts: mesos-slaves
+#   gather_facts: false
+#   sudo: yes
+#
+#   vars:
+#     - mesos_options_slave:
+#         containerizers: "docker,mesos"
+#         executor_registration_timeout: 20mins
+#     - zk_servers_noproto: "{{ groups['mesos-masters'] | join(':2181,') }}:2181"
+#     - marathon_masters: "http://{{ groups['mesos-masters'] | join(':8080,') }}:8080"
+#     - discovery_method: default
+#
+#   roles:
+#     - { role: mesosphere, tags: [ 'mesos' ], mesos_mode: slave }
+#     - { role: marathon, tags: [ 'marathon'], marathon_run_mode: bridge }
+#     - { role: haproxy, tags: ['haproxy'] }
+#     - { role: hadiscovery, tags: ['hadiscovery'], when: "discovery_method == 'hadiscovery'"}
+#     - { role: bamboo-haproxy, tags: [ 'bamboo'], when: "discovery_method == 'bamboo'" }
+#
+# - hosts: spark-masters
+#   sudo: yes
+#   roles:
+#   - { role: spark-master }

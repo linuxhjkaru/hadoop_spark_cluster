@@ -1,0 +1,5 @@
+---
+- include: yum.yml
+- include: ntp.yml
+- include: selinux.yml
+- include: firewalld.yml
