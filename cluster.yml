@@ -1,17 +1,13 @@
 ---
 - hosts: all
-  sudo: yes
-
-  # tasks:
-  #   - name: Set global cluster variable facts
-  #     set_fact:
-  #       zk_endpoint: "zk://{{ groups['mesos-masters'] | join(':2181,') }}:2181"
-
+  become: yes
+  user: vagrant
   roles:
     - common
 
-- hosts: ambari-masters
-  sudo: yes
+- hosts: node1
+  become: yes
+  user: vagrant
   roles:
     - ambari
 

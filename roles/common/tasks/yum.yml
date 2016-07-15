@@ -1,7 +1,6 @@
-tasks:
-  - name: Yum update packages
-    yum: name=* state=latest
+- name: Yum update packages
+  yum: name=* state=latest
 
-  - name: Yum install packages
-    yum: name={{ item }} state=latest
-    with_items: yum_install_packages
+- name: Yum install packages
+  yum: name={{ item }} state=latest
+  with_items: yum_install_packages

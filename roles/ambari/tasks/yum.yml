@@ -1,3 +1,2 @@
-tasks:
-  - name: Yum install ambari package
-    yum: name=ambari-server state=latest
+- name: Yum install ambari package
+  yum: name=ambari-server state=latest

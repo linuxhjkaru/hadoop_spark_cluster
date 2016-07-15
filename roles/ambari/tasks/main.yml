@@ -1,2 +1,2 @@
----
 - include: repository.yml
+- include: yum.yml

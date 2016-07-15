@@ -36,8 +36,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       if index == cluster.size - 1
         cfg.vm.provision :ansible do |ansible|
           ansible.verbose = "v"
-
-          ansible.inventory_path = "inventory/vagrant"
+          # ansible.sudo = true
+          # ansible.inventory_path = "inventory/vagrant"
           ansible.playbook = "cluster.yml"
           ansible.limit = 'all'# "#{info[:ip]}" # Ansible hosts are identified by ip
         end # end cfg.vm.provision
