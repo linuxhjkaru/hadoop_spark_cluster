@@ -4,4 +4,4 @@
     - ntp
     - config
 - name: Be sure NTPd is running and enabled
-  shell: systemctl restart ntpd.service
+  shell: systemctl restart ntpd

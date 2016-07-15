@@ -2,9 +2,9 @@ VAGRANTFILE_API_VERSION = "2"
 
 base_dir = File.expand_path(File.dirname(__FILE__))
 cluster = {
-  "node1" => { :ip => "172.168.1.11",  :cpus => 1, :mem => 768 },
-  "node2" => { :ip => "172.168.1.12",  :cpus => 1, :mem => 768 },
-  "node3" => { :ip => "172.168.1.13",  :cpus => 1, :mem => 768 },
+  "node1" => { :ip => "172.168.1.11",  :cpus => 1, :mem => 2048 },
+  "node2" => { :ip => "172.168.1.12",  :cpus => 1, :mem => 2048 },
+  "node3" => { :ip => "172.168.1.13",  :cpus => 1, :mem => 2048 },
 }
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
