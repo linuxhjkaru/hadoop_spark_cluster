@@ -1,0 +1,3 @@
+- name: Add repository ambari
+  get_url: url=http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.1.1/ambari.repo
+           dest=/etc/yum.repos.d/ambari.repo force=True

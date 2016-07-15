@@ -1,0 +1,8 @@
+yum_install_packages:
+  - python-devel
+  - gcc
+  - git
+  - curl
+  - wget
+  - logrotate
+  - ntp
