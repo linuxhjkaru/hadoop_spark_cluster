@@ -2,9 +2,9 @@ VAGRANTFILE_API_VERSION = "2"
 
 base_dir = File.expand_path(File.dirname(__FILE__))
 cluster = {
-  "node1" => { :ip => "172.168.1.11",  :cpus => 2, :mem => 6144 },
-  "node2" => { :ip => "172.168.1.12",  :cpus => 2, :mem => 3072 },
-  "node3" => { :ip => "172.168.1.13",  :cpus => 2, :mem => 3072 },
+  "node1" => { :ip => "172.168.1.41",  :cpus => 2, :mem => 8192 },
+  "node2" => { :ip => "172.168.1.42",  :cpus => 2, :mem => 2048 },
+  "node3" => { :ip => "172.168.1.43",  :cpus => 2, :mem => 2048 }
 }
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
@@ -19,6 +19,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.hostmanager.manage_host = true
   config.hostmanager.include_offline = true
 
+  config.ssh.username = 'vagrant'
+  config.ssh.password = 'vagrant'
+
   cluster.each_with_index do |(hostname, info), index|
     config.vm.define hostname do |cfg|
 
@@ -26,9 +29,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         override.vm.box = "CentOS7_x64"
         override.vm.box_url = "https://github.com/holms/vagrant-centos7-box/releases/download/7.1.1503.001/CentOS-7.1.1503-x86_64-netboot.box"
         override.vm.network :private_network, ip: "#{info[:ip]}", virtualbox_inet:"test_cluster"
-        override.vm.hostname = hostname
+        override.vm.hostname = "#{hostname}.ahri"
 
-        vb.name = 'vagrant-' + hostname
+        vb.name = 'test-vagrant-' + hostname
         vb.customize ["modifyvm", :id, "--memory", info[:mem], "--cpus", info[:cpus], "--hwvirtex", "on", "--ioapic", "on" ]
       end # end cfg.vm.provider
 
